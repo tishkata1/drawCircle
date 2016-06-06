@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circle</title>
+</head>
+<body>
+<div class="circle"></div>
+
+<script>
+
+    function draw(r) {
+        Draw = function (circle) {
+            //size of the points
+            this.size = function (x, y) {
+                this.elm.style.width = x + 'px';
+                this.elm.style.height = y + 'px';
+                this.width = x;
+                this.height = y;
+            };
+            //positioning the points
+            this.position = function (x, y) {
+                var xo = this.width / 2;
+                var yo = this.height / 2;
+                this.elm.style.left = (x - xo) + 'px';
+                this.elm.style.top = (y - yo) + 'px';
+            };
+            //the color of the points
+            this.background = function (col) {
+                this.elm.style.background = col;
+                this.elm.style.borderRadius = '50%';
+            };
+
+            this.elm = document.createElement('div');
+            this.elm.style.position = 'absolute';
+            circle.appendChild(this.elm);
+        };
+
+        var circle = document.querySelector('.circle'),
+                points = 600, //the number of points
+                increase = Math.PI * 2 / points,
+                angle = 0,
+                x = 0,
+                y = 0;
+
+        for (var i = 0; i < points; i++) {
+            var p = new Draw(circle);
+            p.background('black');
+            p.size(2, 2);
+            x = r * Math.cos(angle) + 600;
+            y = r * Math.sin(angle) + 300;
+            p.position(x, y);
+            angle += increase;
+        }
+    }
+    draw(150);//set radius 
+
+</script>
+
+</body>
+</html>
